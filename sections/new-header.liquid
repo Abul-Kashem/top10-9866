@@ -1,0 +1,87 @@
+<style>
+  body:not(.index) .top-new-header {
+    border-bottom: 1px solid #eee;
+  }
+  .container {
+
+  }
+</style>
+
+<div class="container">
+  <div class="new-header">
+    <div class="logo-menu">
+      <a href="/" class="logo-img">
+        <img src="{{ section.settings.logo | | img_url: '180x' }}" alt="ahn logo">
+      </a>
+      <div class="links">
+        {%- for block in section.blocks -%}
+          <a href="{{ block.settings.link_url}}">{{ block.settings.name }}</a>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="search">
+      <form
+        action="/search"
+        method="get"
+        role="search"
+        id="searchForm"
+      >
+        <input
+          type="search"
+          name="q"
+          id="searchInput"
+          aria-level="Search on our site"
+          placeholder="Search"
+          class="search-header__input"
+        >
+        <button type="submit" class="search-header__submit">
+          <img src="{{ '2 -search-icon.png' | asset_url }}" alt="Search icon">
+        </button>
+      </form>
+      <div class="searchResult"></div>
+    </div>
+
+    <div class="icons">
+      <a href="/account/login" class="">
+        <img src="{{ '2-user.png' | asset_img_url: "medium" }}" alt="login user">
+      </a>
+      <a href="/cart" class="cart toggle-sidecart">
+        <span class="js-cartcount">{{ cart.item_count }}</span>
+        <img src="{{ '2-cart.png' | asset_img_url: "medium" }}" alt="cart">
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "top-new-header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "header menu",
+      "type": "menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Menu Name"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
