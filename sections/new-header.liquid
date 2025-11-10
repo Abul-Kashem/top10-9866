@@ -91,7 +91,7 @@
   .logo-menu {
     display: flex;
     flex: 1;
-    max-width: 530px;
+    max-width: 450px;
     width: 100%;
     justify-content: space-between;
     gap: 1em;
@@ -189,7 +189,7 @@
   <div class="new-header">
     <div class="logo-menu">
       <a href="/" class="logoimg">
-        <img src="{{ section.settings.logo | | image_url: '180x' }}" alt="ahn logo">
+        <img src="{{ section.settings.logo | image_url: width: 180, height: 180}}" alt="ahn logo">
       </a>
       <div class="links">
         {%- for block in section.blocks -%}
@@ -221,12 +221,12 @@
     </div>
 
     <div class="icons">
-      <a href="/account/login" class="">
-        <img src="{{ '2-user.png' | asset_img_url: "medium" }}" alt="login user">
+      <a href="/account/login" class="cart">
+        <img src="{{ '2 -user.png' | asset_img_url: "medium" }}" alt="login user">
       </a>
       <a href="/cart" class="cart toggle-sidecart">
         <span class="js-cartcount">{{ cart.item_count }}</span>
-        <img src="{{ '2-cart.png' | asset_img_url: "medium" }}" alt="cart">
+        <img src="{{ '2 -cart.png' | asset_img_url: "medium" }}" alt="cart">
       </a>
     </div>
   </div>
