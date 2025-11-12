@@ -1,0 +1,136 @@
+<div class="home-banner pos-relative">
+  {% comment %} <img src="{{ section.settings.banner_img | image_url: width: 100%, height: 100%}}" alt="banner image"> {% endcomment %}
+
+  {% assign img = section.settings.banner_img %}
+  {% assign max_w = max_w | default: 1000 %}
+
+  {% comment %}
+    <img
+      src="{{ img | image_url: width: max_w }}"
+      srcset="
+        {{ img | image_url: width: 400 }} 400w,
+        {{ img | image_url: width: 800 }} 800w,
+        {{ img | image_url: width: max_w }} {{ m]]]ax_w }}w
+      "
+      sizes="100vw"
+      style="width:100%; height:auto;"
+      alt="{{ img.alt | escape }}"
+      loading="lazy"
+    >
+  {% endcomment %}
+
+  <img src="{{ img |  image_url  }}" alt="">
+
+  <div class="content pos-abs">
+    <div class="container">
+      <h6>{{ section.settings.mini_text }}</h6>
+      <h1>{{ section.settings.title }}</h1>
+      <p>{{ section.settings.content }}</p>
+
+      <a href="{{ section.settings.url }}">SHOP NOW</a>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .home-banner {
+    overflow: hidden;
+    display: grid;
+    align-items: center;
+  }
+
+  .home-banner .content {
+    text-align: left;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+  }
+
+  .content a {
+    display: block;
+    background: #cc4d0f;
+    color: #fff;
+    text-decoration: none;
+    width: fit-content;
+    padding: 10px 2em;
+    margin: 2em 0 0;
+    font-weight: 600;
+  }
+
+  body .home-banner h6 {
+    font-size: 18px;
+    color: #121212;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  body .home-banner h1 {
+    margin: 0.5em 0 0.5em;
+    font-size: 40px;
+  }
+
+  body .home-banner p {
+    margin: 0;
+  }
+
+  .home-banner p {
+    max-width: 340px;
+    width: 100%;
+    margin: 0.5em 0 0;
+    font-weight: 600;
+    font-size: 1em;
+  }
+
+  .home-banner img {
+    width: 100%;
+    min-height: 80vh;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    object-position: left;
+    opacity: 0.6;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Banner",
+  "class": "banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "banner_img",
+      "label": "Banner Image"
+    },
+    {
+      "type": "text",
+      "id": "mini_text",
+      "label": "Mini Text",
+      "default": "New Arrival"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "text",
+      "id": "content",
+      "label": "Content",
+      "default": "Award winning products"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Banner"
+    }
+  ]
+}
+{% endschema %}
