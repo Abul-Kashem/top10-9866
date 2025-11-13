@@ -1,0 +1,190 @@
+{% schema %}
+{
+  "name": "Browse Collection",
+  "class": "collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Browser the Range"
+    },
+    {
+      "type": "text",
+      "id": "paragraph",
+      "label": "Content",
+      "default": "Elegant, Timeless and Functional Products"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "step": 0.5,
+      "default": 1,
+      "unit": "em",
+      "min": 0,
+      "max": 8
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "step": 0.5,
+      "default": 1,
+      "unit": "em",
+      "min": 0,
+      "max": 8
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Collection",
+      "type": "collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "get-col",
+          "label": "Choose Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "col-img",
+          "label": "title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Browse Collection",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+<div class="container">
+  <div class="browse-collection">
+    <h2>{{ section.settings.title }}</h2>
+    <p>{{ section.settings.paragraph }}</p>
+
+
+    <div class="collection-lists">
+      {%- for block in section.blocks -%}
+        <a href="{{ block.settings.get-col.url }}" class="pos-relative child-col-{{ forloop.index }}">
+          {%- if block.settings['col-img'] == null -%}
+            {{ 'collection-1' | placeholder_svg_tag }}
+          {%- else -%}
+            <img
+              src="{{ block.settings.col-img | image_url }}"
+              alt="{{ block.settings.get-col.title }}"
+            >
+          {%- endif -%}
+          <h3>{{ block.settings['get-col'].title }}</h3>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+
+
+{% style %}
+      .browse-collection{
+        text-align: center;
+        margin: 2em 0;
+        padding-top: {{ section.settings.padding_top }}em;
+        padding-bottom: {{ section.settings.padding_bottom }}em;
+      }
+
+
+      .browse-collection h2{
+        margin-bottom: 0;
+      }
+
+      .browse-collection p{
+        margin-top: 0;
+      }
+
+    .collection-lists{
+      display: grid;
+      grid-template-areas: 'one one one two two two'
+                           'one one one three three three';
+      gap: 1em;
+      padding-top: 1em;
+
+    }
+
+    .collection-lists a{
+      position: relative;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      outline: 2px solid #fff;
+      outline-offset: -14px;
+      /* border-radius: 8px; */
+    }
+
+    .collection-lists a::after{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    .collection-lists h3{
+      position: absolute;               /* 1 */
+      inset: 0;                         /* top/right/bottom/left = 0 */
+      display: flex;                    /* 5 */
+      align-items: center;              /* 6 */
+      justify-content: center;          /* 7 */
+      color: #fff;                      /* 8 */
+      font-family: 'SF Mono', sans-serif;
+      font-size: clamp(16px, 4vw, 22px);
+      letter-spacing: 0.6px;
+      text-shadow: 0 1px 3px rgba(0,0,0,.6);
+      margin: 0;
+      pointer-events: none;             /* so the link stays clickable */
+      z-index: 2;
+    }
+
+    .collection-lists img{
+      height: 100%;
+    }
+
+    .browse-collection a.child-col-1{
+      grid-area: one;
+    }
+
+    .browse-collection a.child-col-2{
+      grid-area: two;
+    }
+
+    .browse-collection a.child-col-3{
+      grid-area: three;
+    }
+
+    .collection-lists svg{
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.1);
+      width: 100%;
+      height: 100%;
+    }
+{% endstyle %}
