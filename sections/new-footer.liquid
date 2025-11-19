@@ -1,0 +1,91 @@
+{% schema %}
+{
+  "name": "New Footer",
+  "blocks": [
+    {
+      "name": "Footer Info",
+      "type": "link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "footer_logo",
+          "label": "Footer Logo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "New Footer",
+      "blocks": [
+        {
+          "type": "link"
+        },
+        {
+          "type": "link"
+        },
+        {
+          "type": "link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .new-footer {
+    background: #000;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 2em 0;
+  }
+
+  .footer-info {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    text-transform: uppercase;
+    align-items: center;
+  }
+  
+  .footer-info a{
+    color: #fff;
+    font-size: 1em;
+    text-decoration: none;
+  }
+
+  img.footerlogo {
+    width: 50px;
+    height: 50px;
+  }
+</style>
+
+<div class="new-footer">
+  <div class="container">
+    <div class="footer-info">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.footer_logo -%}
+          <img
+            src="{{ block.settings.footer_logo | image_url}}"
+            alt="{{ block.settings.footer_logo.alt }}"
+            class="footerlogo"
+          >
+
+        {%- else -%}
+          <a href="{{ block.settings.url }}">{{ block.settings.name }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>

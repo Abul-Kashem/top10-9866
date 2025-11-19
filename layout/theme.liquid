@@ -62,7 +62,8 @@
       {{ content_for_layout }}
     </main>
 
-    {% sections 'footer-group' %}
+    {% comment %} {% sections 'footer-group' %} {% endcomment %}
+    {% section 'new-footer' %}
 
     {% render 'search-modal' %}
 
