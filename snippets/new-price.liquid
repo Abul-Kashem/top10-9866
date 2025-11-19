@@ -1,0 +1,7 @@
+{%- if product.selected_or_first_available_variant.compare_at_price -%}
+  <h4 class="compare_at_price">
+    {{ product.selected_or_first_available_variant.compare_at_price | money }}
+  </h4>
+{%- endif -%}
+
+<div class="main-price">{{ product.selected_or_first_available_variant.price | money }}</div>

@@ -1,0 +1,372 @@
+<link rel="stylesheet" href="{{ '7 -flickity.css' | asset_url }}">
+<script src="{{ '7 -flickity.js' | asset_url }}"></script>
+
+{% schema %}
+{
+  "name": "Home Animation Section",
+  "class": "design-product-section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "hide_image",
+      "label": "Hide Empty Image",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_price",
+      "label": "Hide Price",
+      "default": false,
+      "info": "Hide the price for column"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Product Category"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Label",
+      "default": "View More"
+    },
+    {
+      "type": "range",
+      "label": "Margin Top",
+      "id": "m_top",
+      "min": 0,
+      "max": 8,
+      "step": 0.5,
+      "unit": "em",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "label": "Margin Bottom",
+      "id": "m_bottom",
+      "min": 0,
+      "max": 8,
+      "step": 0.5,
+      "unit": "em",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "column",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Choose Product"
+        },
+        {
+          "type": "text",
+          "id": "review",
+          "label": "Reviews",
+          "default": "4.8"
+        },
+        {
+          "type": "image_picker",
+          "id": "gif",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link Url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Animation Section",
+      "category": "Product",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+{% style %}
+  
+
+
+{{ section.id }} .animation-section {
+  text-align: center;
+  margin-top: {{ section.settings.m_top }}em;
+  margin-bottom: {{ section.settings.m_bottom }}em;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.animation-section:focus-visible {
+  box-shadow: none;
+}
+
+.adjustscroll .animation-section.flickity-enabled {
+  display: block !important;
+  width: 100%;
+}
+
+.animation-section .review-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 1em;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.1;
+}
+
+.animation-section h2 {
+  font-size: 16px !important;
+  letter-spacing: 0;
+  margin: 14px 0 10px;
+  font-weight: 400;
+}
+
+.animation-section .flickity-page-dots {
+  bottom: -2.5em;
+}
+
+.animation-section .price-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.animation-section .price-section h4 {
+  font-size: 16px;
+  letter-spacing: 0.1px;
+  font-weight: 400;
+}
+
+.animation-section button.flickity-button {
+  background: hsla(0, 0%, 100%, 1);
+}
+
+{{ section.id }} span.review-star {
+  color: #000;
+}
+
+{{ section.id }} .animation-section img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+{{ section.id }} .animation-section.column-1 img {
+  max-width: 768px;
+}
+
+{{ section.id }} .animation-section .flex-item {
+  position: relative;
+}
+
+{{ section.id }} .animation-section .home-content {
+  align-self: flex-end;
+  padding: 0 12px;
+  max-width: 96%;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.animation-section .buynow {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  width: fit-content;
+  margin: auto auto 0;
+  padding: .7em 1.6em;
+  border-radius: 1.4em;
+  font-weight: 400;
+  line-height: 1.2;
+  font-size: 14px;
+  opacity: 0;
+  text-transform: uppercase;
+}
+
+.animation-section a.flex-item:hover {
+  background: #0046c8;
+  color: #fff !important;
+  flex-grow: .92;
+}
+
+.animation-section * {
+  transition: 0.4s all ease-out;
+}
+
+.animation-section a.flex-item:hover * {
+  color: #fff;
+}
+
+.animation-section a.flex-item .blur-load {
+  overflow: hidden;
+}
+
+
+.animation-section a.flex-item .buynow {
+  margin-top: 2em;
+}
+
+.animation-section a.flex-item:hover .buynow {
+  opacity: 1;
+  margin-top: 1em;
+}
+
+@media screen and (max-width: 1200px) {
+  .{{ section.id }} .animation-section.column-6 br {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .{{ section.id }} .animation-section .home-content {
+    padding-inline: 6px;
+    padding-bottom: 2em;
+  }
+}
+
+.flickity-slider .flex-item{
+  width:27%;
+  min-height:
+}
+
+@media screen and (max-width: 768px){
+  .{{ section.id }} .animation-section.flickity-enabled a.flex-item:hover img.featured-img{
+    transform: scale(1.5);
+  }
+
+  .animation-section .buynow{
+    display:block;
+    
+  }
+}
+
+@media screen and (max-width: 1200px){
+  .{{ section.id }} .animation-section.flickity-enabled a.flex-item:hover img.featured-img{
+    transform: scale(1.5);
+  }
+
+  .animation-section .buynow{
+    display:block;
+    
+  }
+}
+{% endstyle %}
+
+
+
+
+
+<div class="{{ section.id }} home-animation-section">
+  <div class="container">
+    {%- if section.settings.title -%}
+      <h1>{{ section.settings.title }}</h1>
+    {%- endif -%}
+  </div>
+
+
+
+
+<div class="adjustscroll">
+  <div class="animation-section {% for block in section.blocks %}{% if forloop.last %}column-{{ forloop.index }}{% endif %}{% endfor %}">
+    {% for block in section.blocks %}
+      {% if block.settings.product.url != blank %}
+        <a href="{{ block.settings.product.url }}" class="flex-item">
+      {% else %}
+        <div class="flex-item">
+      {% endif %}
+
+      <div class="grid">
+
+        <div class="blur-load">
+
+          {% if block.settings.product.featured_image != blank %}
+            {% assign emptyImg = 'product-' | append: forloop.index %}
+            {% if section.settings.hide_image != false %}
+              <span class="emptysvg">
+                {{ emptyImg | placeholder_svg_tag | class: 'emptysvg' }}
+              </span>
+            {% else %}
+              <img loading="lazy" src="{{ block.settings.product.featured_image | img_url: '800x' }}" alt="{{ block.settings.product.featured_image.alt }}" class="featured-img">
+            {% endif %}
+          {% endif %}
+
+        </div>
+
+        <div class="home-content">
+            <div class="review-section">
+                <img src="{{ 'reviews.png' | asset_img_url }}" alt="reviews">
+                <span class="review-star">{{ block.settings.review }}</span>
+            </div>
+
+            <h2 class="h2">
+              {{ block.settings.product.title |  truncate: 40, '...' }}
+            </h2>
+
+            {%- unless section.settings.hide_price -%}
+              <div class="price-section">
+                {% render 'new-price', product: block.settings.product %}
+              </div>
+            {%- endunless -%}
+
+            {%- if section.settings.button_text != blank -%}
+              <div class="buynow">
+                {{ section.settings.button_text | strip_html }}
+              </div>
+            {%- endif -%}
+
+        </div>
+        
+      </div>
+      
+     
+      
+      {% if block.settings.product.url != blank %}
+        </a>
+      {% else %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+
+</div>
+
+
+
+<script defer>
+  let elem = document.querySelector('.adjustscroll .animation-section');
+  let flkty = new Flickity(elem, {
+    imagesLoaded: true,
+    lazyLoad: 8,
+    wrapAround: false,
+    contain: true,
+    groupCells: true
+  });
+</script>

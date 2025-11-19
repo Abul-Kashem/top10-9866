@@ -1,0 +1,81 @@
+{% schema %}
+{
+  "name": "BG Image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "label": "Background Image",
+      "id": "bg_image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title here"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BG Image"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .bg-image {
+    background-image: url({{ section.settings.bg_image | image_url }});
+    background-size: cover;
+    height: 60vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  .bg-image .section {
+    max-width: 600px;
+    width: 100%;
+  }
+
+  body .bg-image h1{
+    color: #fff;
+    font-size: 1.5em;
+  }
+  body .bg-image p {
+    color: #fff;
+  }
+
+  .bg-image a {
+    display: block;
+    background: #cc4d0f;
+    color: #fff;
+    width: fit-content;
+    margin-top: 2em;
+    padding: 10px 2em;
+    font-weight: 600;
+    margin-inline: auto;
+  }
+</style>
+
+<div class="bg-image">
+  <div class="container">
+    <div class="section">
+      <h1 class="bg-color">{{- section.settings.title -}}</h1>
+      <p class="bg-color">{{- section.settings.content -}}</p>
+      <a href="{{ section.settings.url }}">SHOP NOW</a>
+    </div>
+  </div>
+</div>

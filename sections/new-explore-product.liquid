@@ -1,0 +1,120 @@
+{% schema %}
+{
+  "name": "Explore Product",
+  "settings": [
+    {
+      "type": "select",
+      "label": "Content Alignment",
+      "id": "content_align",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "mini_title",
+      "label": "Mini Title",
+      "default": "Collaboration"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Explore our beautiful product"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "step": 0.5,
+      "default": 1,
+      "unit": "em",
+      "min": 0,
+      "max": 8
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "step": 0.5,
+      "default": 1,
+      "unit": "em",
+      "min": 0,
+      "max": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Explore Product"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .explore-product{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1em;
+      align-items: center;
+      text-align: left;
+      padding: {{ section.settings.padding_top }}em 0 {{ section.settings.padding_bottom }}em;
+  }
+
+  .explore-product .content{
+    min-width: 500px;
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .explore-product.right .content{
+    order: 1;
+  }
+
+  .explore-product h6.mini-title{
+    margin: 0 0 1em;
+  }
+</style>
+
+<div class="container">
+  <div class="explore-product {{ section.settings.content_align }}">
+    <div class="content">
+      <h6 class="mini-title">{{- section.settings.title -}}</h6>
+      <h1 class="mini-title">{{- section.settings.mini_title -}}</h1>
+      <p class="content">{{- section.settings.content -}}</p>
+
+      <a href="{{ section.settings.url }}">DISCOVER</a>
+    </div>
+
+    <div class="gallery">
+      {%- if section.settings.image == null -%}
+        {{ 'product-1' | placeholder_svg_tag }}
+      {%- else -%}
+        <img src="{{ section.settings.image | image_url  }}" alt="{{ section.settings.image.alt }}">
+      {%- endif -%}
+    </div>
+  </div>
+</div>
